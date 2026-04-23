@@ -1,0 +1,78 @@
+.header {
+  height: 70px;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 20px;
+}
+
+/* ЛЕВАЯ ЧАСТЬ */
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  font-size: 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* ПРАВАЯ ЧАСТЬ */
+.right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* УВЕДОМЛЕНИЯ */
+.notification {
+  position: relative;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background: red;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+/* ПОЛЬЗОВАТЕЛЬ */
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #6366f1;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.role {
+  font-size: 12px;
+  color: #6b7280;
+}
