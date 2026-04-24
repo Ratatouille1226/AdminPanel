@@ -6,7 +6,7 @@ export const Header = () => {
       <h1>Панель управления</h1>
 
       <div className={styles.user}>
-        <span>Admin</span>
+        <span>Хуйкин</span>
       </div>
     </header>
   );

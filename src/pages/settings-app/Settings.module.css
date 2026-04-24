@@ -1,0 +1,92 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* SAVE BUTTON */
+.saveBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 14px;
+  border-radius: 10px;
+
+  border: none;
+  background: #6366f1;
+  color: white;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.saveBtn:hover {
+  background: #4f46e5;
+}
+
+/* CARD */
+.card {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 14px;
+
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ROW */
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.row label {
+  font-size: 13px;
+  color: #374151;
+  font-weight: 500;
+}
+
+/* INPUTS */
+.row input,
+.row textarea {
+  padding: 10px 12px;
+  border-radius: 10px;
+
+  border: 1px solid #e5e7eb;
+  outline: none;
+
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.row input:focus,
+.row textarea:focus {
+  border-color: #6366f1;
+}
+
+.row textarea {
+  min-height: 100px;
+  resize: vertical;
+}
