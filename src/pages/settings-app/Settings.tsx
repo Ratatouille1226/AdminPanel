@@ -1,6 +1,55 @@
 import styles from "./Settings.module.css";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import {
+  fetchStore,
+  updateStore,
+} from "../../features/settings-app/settingsSlise";
+import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import type { StoreForm } from "../../types";
 
 export const Settings = () => {
+  const storeId = 1; // ЗАХАРДКОДИЛ ИД МАГАЗИНА ПОКА НЕТ АВТОРИЗАЦИИ В АДМИНКЕ
+
+  const dispatch = useAppDispatch();
+  const {
+    data: store,
+    loading,
+    error,
+  } = useAppSelector((state) => state.storeSettings);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<StoreForm>();
+
+  useEffect(() => {
+    dispatch(fetchStore(storeId));
+  }, []);
+
+  // заполняем форму
+  useEffect(() => {
+    if (store) {
+      reset({
+        name: store.name || "",
+        description: store.description || "",
+        phone: store.phone || "",
+        email: store.email || "",
+        address: store.address || "",
+      });
+    }
+  }, [store]);
+
+  const onSubmit = (data: any) => {
+    dispatch(updateStore({ ...store, ...data }));
+  };
+
+  console.log("store", store);
+
+  if (loading || !store) return <p>Загрузка...</p>;
+
   return (
     <div className={styles.page}>
       {/* HEADER */}
@@ -10,39 +59,83 @@ export const Settings = () => {
           <p className={styles.subtitle}>Управление информацией о магазине</p>
         </div>
 
-        <button className={styles.saveBtn}>
+        <button className={styles.saveBtn} onClick={handleSubmit(onSubmit)}>
           <i className="fa-solid fa-floppy-disk"></i>
           Сохранить
         </button>
       </div>
 
       {/* FORM */}
-      <div className={styles.card}>
+      <form className={styles.card}>
         <div className={styles.row}>
           <label>Название магазина</label>
-          <input type="text" placeholder="My Store" />
+          <input
+            {...register("name", {
+              required: "Введите название магазина",
+              minLength: {
+                value: 2,
+                message: "Минимум 2 символа",
+              },
+            })}
+          />
+          {errors.name && (
+            <span className={styles.error}>{errors.name.message}</span>
+          )}
         </div>
 
         <div className={styles.row}>
           <label>О нас</label>
-          <textarea placeholder="Расскажите о магазине..." />
+          <textarea
+            {...register("description", {
+              required: "Введите описание",
+            })}
+          />
+          {errors.description && (
+            <span className={styles.error}>{errors.description.message}</span>
+          )}
         </div>
 
         <div className={styles.row}>
           <label>Контакты</label>
-          <input type="text" placeholder="+7 999 999 99 99" />
+          <input
+            {...register("phone", {
+              required: "Введите телефон",
+            })}
+          />
+          {errors.phone && (
+            <span className={styles.error}>{errors.phone.message}</span>
+          )}
         </div>
 
         <div className={styles.row}>
           <label>Email</label>
-          <input type="email" placeholder="store@mail.com" />
+          <input
+            type="email"
+            {...register("email", {
+              required: "Введите email",
+              pattern: {
+                value: /^\S+@\S+$/i,
+                message: "Некорректный email",
+              },
+            })}
+          />
+          {errors.email && (
+            <span className={styles.error}>{errors.email.message}</span>
+          )}
         </div>
 
         <div className={styles.row}>
           <label>Адрес</label>
-          <input type="text" placeholder="Istanbul, Turkey" />
+          <input
+            {...register("address", {
+              required: "Введите адрес",
+            })}
+          />
+          {errors.address && (
+            <span className={styles.error}>{errors.address.message}</span>
+          )}
         </div>
-      </div>
+      </form>
     </div>
   );
 };
